@@ -1,0 +1,234 @@
+<!-- <div class="row">
+  <div class="col-xs-12">
+    <app-game-control (numberEmit)="onNumberEmit($event)"></app-game-control>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <app-odd *ngFor="let oddNumber of odd"
+             [number]="oddNumber"></app-odd>
+    <app-even *ngFor="let evenNumber of even"
+              [number]="evenNumber"></app-even>
+  </div>
+</div> -->
+
+<!--template driven form start-->
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 co-sm-offet-1 col-md-offset-2">
+      <form #signUpForm="ngForm"
+            (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input type="email"
+                 name="email"
+                 id="email"
+                 ngModel
+                 required
+                 email
+                 #email="ngModel"
+                 class="form-control">
+          <span class="help-block"
+                *ngIf="!email.valid && email.touched">Please enter a valid email</span>
+        </div>
+        <div class="form-group">
+          <label for="subscription">Choose a Subscription</label>
+          <select name="subscription"
+                  id="subscription"
+                  [ngModel]="selectedSubscription"
+                  class="form-control">
+            <option *ngFor="let subscription of subscriptions"
+                    [value]="subscription">{{subscription}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 name="password"
+                 ngModel
+                 required
+                 #password="ngModel">
+          <span class="help-block"
+                *ngIf="!password.valid && password.touched">Please enter a valid password</span>
+        </div>
+        <p *ngIf="!signUpForm.valid && signUpForm.touched">The form is invalid</p>
+        <button class="btn-primary"
+                type="submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div> -->
+<!---template driven end-->
+
+<!---Reactive form start-->
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset2">
+      <form [formGroup]="signUpForm"
+            (ngSubmit)="onSubmit()">
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   id="username"
+                   formControlName="username"
+                   class="form-control">
+            <span *ngIf="!signUpForm.get('userData.username')?.valid && signUpForm.get('userData.username')?.touched "
+                  class="help-block">Please enter a valid username!</span>
+            <span *ngIf="signUpForm.get(userData.username)?.errors['nameIsForbidden']">This name is invalid</span>
+            <span *ngIf="signUpForm.get(userData.username)?.errors['required']">This field is required</span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   formControlName="email"
+                   class="form-control">
+            <span *ngIf="!signUpForm.get('userData.email')?.valid && signUpForm.get('userData.email')?.touched "
+                  class="help-block">Please enter a valid email!</span>
+          </div>
+        </div>
+
+        <div class="radio"
+             *ngFor="let gender of genders">
+          <label>
+            <input type="radio"
+                   formControlName="gender"
+                   [value]="gender">{{gender}}
+          </label>
+        </div>
+        <div formArrayName="hobbies">
+          <h4>Your hobbies</h4>
+          <button class="btn btn-default"
+                  type="button"
+                  (click)="onAddHobby()">Add Hobby</button>
+          <div class="form-group"
+               *ngFor="let hobbyControl of getControls(); let i = index">
+            <input type="text"
+                   class="form-control"
+                   [formControlName]="i">
+          </div>
+        </div>
+        <span *ngIf="!signUpForm.valid && signUpForm.touched "
+              class="help-block">Please enter a valid details!</span>
+        <button class="btn btn-primary"
+                type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<!--Reactive form end-->
+
+
+<!---Assignment for reactive form start-->
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-xs-offset-1 col-md-offset-2">
+      <form [formGroup]="projectForm"
+            (ngSubmit)="onProjectSubmit()">
+        <div class="form-group">
+          <label for="name">Project Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 formControlName="projectName">
+        </div>
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="projectStatus">Project Status</label>
+          <select id="projectStatus"
+                  class="form-control"
+                  formControlName="projectStatus">
+            <option *ngFor="let status of projectStatus"
+                    [value]="status">
+              {{status}}
+            </option>
+          </select>
+        </div>
+        <button class="btn btn-primary"
+                type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+<!---Assignmnet for reactive form end-->
+
+
+<!--HTTP MODULE START-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form #postForm="ngForm"
+            (ngSubmit)="onCreatePost(postForm.value)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text"
+                 class="form-control"
+                 id="title"
+                 required
+                 ngModel
+                 name="title" />
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea class="form-control"
+                    id="content"
+                    required
+                    ngModel
+                    name="content"></textarea>
+        </div>
+        <button class="btn btn-primary"
+                type="submit"
+                [disabled]="!postForm.valid">
+          Send Post
+        </button>
+      </form>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <button class="btn btn-primary"
+              (click)="onFetchPosts()">
+        Fetch Posts
+      </button>
+      |
+      <button class="btn btn-danger"
+              [disabled]="loadedPosts.length < 1"
+              (click)="onClearPosts()">
+        Clear Posts
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+      <ul class="list-group"
+          *ngIf="loadedPosts.length >= 1 && !isFetching">
+        <li class="list-group-item"
+            *ngFor="let post of loadedPosts">
+          <h3>{{post.title}}</h3>
+          <p>{{post.content}}</p>
+          <p>{{post.id}}</p>
+        </li>
+      </ul>
+      <p *ngIf="isFetching">Loading.....</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!--HTTP MODULE END-->
