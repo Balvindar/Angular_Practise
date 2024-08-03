@@ -7,14 +7,18 @@ import { OddComponent } from './odd/odd.component';
 import { EvenComponent } from './even/even.component';
 import { GameControlComponent } from './game-control/game-control.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth-interceptor.service';
+import { LogingInterceptorService } from './logging-interceptor.service';
+import { HoverDirective } from './hover.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     OddComponent,
     EvenComponent,
-    GameControlComponent
+    GameControlComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,18 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LogingInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { CustomValidators } from './custom-validators';
 import { HttpClient } from '@angular/common/http';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   // @ViewChild('signUpForm') signUpForm!: NgForm; // for template driven form
   title = 'rough_practise_angular';
   subscriptions = ['Basic', 'Advanced', 'Pro'];
@@ -28,14 +29,19 @@ export class AppComponent implements OnInit {
 
   loadedPosts: Post[] = [];
   isFetching = false;
+  error = '';
+  private erroSub!: Subscription;
 
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private postsService: PostsService) { }
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private postsService: PostsService, private router: Router) { }
 
 
 
   ngOnInit() {
+
+    this.erroSub = this.postsService.error.subscribe(errorMessage => this.error = errorMessage);
 
     this.onFetchPosts();
     // this.signUpForm = new FormGroup({
@@ -128,8 +134,12 @@ export class AppComponent implements OnInit {
     // Send Http request
     this.isFetching = true;
     this.postsService.fetchPosts().subscribe(posts => {
+      console.log(posts);
       this.isFetching = false;
       this.loadedPosts = posts;
+    }, error => {
+      this.isFetching = false;
+      this.error = error.message;
     });
   }
 
@@ -138,5 +148,14 @@ export class AppComponent implements OnInit {
     this.postsService.deletePosts().subscribe(() => {
       this.loadedPosts = [];
     });
+  }
+
+  onHandleError() {
+    this.error = '';
+  }
+
+
+  ngOnDestroy() {
+    this.erroSub.unsubscribe();
   }
 }

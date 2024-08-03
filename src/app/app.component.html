@@ -166,7 +166,7 @@
 
 
 <!--HTTP MODULE START-->
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <form #postForm="ngForm"
@@ -224,11 +224,31 @@
           <p>{{post.id}}</p>
         </li>
       </ul>
-      <p *ngIf="isFetching">Loading.....</p>
+      <p *ngIf="isFetching && !error">Loading.....</p>
+      <div class="alert alert-danger"
+           *ngIf="error">
+        <h1>An Error Occured</h1>
+        <p>{{error}}</p>
+        <button class="btn btn-danger"
+                (click)="onHandleError()">Okay</button>
+      </div>
     </div>
   </div>
+</div> -->
+<!--HTTP MODULE END-->
+
+
+
+
+<!---Host Listner Practise start-->
+
+<div class="container-ji"
+     appHover>
+  <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
 </div>
 
+<div appHover>
+  <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
+</div>
 
-
-<!--HTTP MODULE END-->
+<!--Host Listner Practise end-->
