@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { LogingInterceptorService } from './logging-interceptor.service';
 import { HoverDirective } from './hover.directive';
+import { TrimLeadingZeroDirective } from './trimleadingZero.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HoverDirective } from './hover.directive';
     OddComponent,
     EvenComponent,
     GameControlComponent,
-    HoverDirective
+    HoverDirective,
+    TrimLeadingZeroDirective
   ],
   imports: [
     BrowserModule,

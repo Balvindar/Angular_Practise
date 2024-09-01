@@ -53,6 +53,18 @@
           <span class="help-block"
                 *ngIf="!password.valid && password.touched">Please enter a valid password</span>
         </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number"
+                 class="form-control"
+                 id="amount"
+                 name="amount"
+                 ngModel
+                 required
+                 trimLeadingZero
+                 #password="ngModel">
+
+        </div>
         <p *ngIf="!signUpForm.valid && signUpForm.touched">The form is invalid</p>
         <button class="btn-primary"
                 type="submit">Submit</button>
@@ -60,10 +72,10 @@
 
     </div>
   </div>
-</div> -->
-<!---template driven end-->
+</div>  -->
+<!---template driven end
 
-<!---Reactive form start-->
+<!-Reactive form start-->
 <!-- <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset2">
@@ -242,13 +254,13 @@
 
 <!---Host Listner Practise start-->
 
-<div class="container-ji"
+<!-- <div class="container-ji"
      appHover>
   <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
 </div>
 
 <div appHover>
   <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
-</div>
+</div> -->
 
 <!--Host Listner Practise end-->
