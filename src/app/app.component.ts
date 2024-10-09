@@ -6,11 +6,26 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
 import { Router } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('balvindar', [
+      state('normal', style({
+        'background-color': 'red',
+        transform: 'translateX(0)'
+      })),
+      state('highlighted', style({
+        backgroundColor: 'blue',
+        transform: 'translateX(100px)'
+      })),
+      transition('normal => highlighted', animate(3000)),
+      transition('highlighted => normal', animate(30))
+    ])
+  ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   // @ViewChild('signUpForm') signUpForm!: NgForm; // for template driven form
@@ -24,6 +39,12 @@ export class AppComponent implements OnInit, OnDestroy {
   projectStatus = ['Stable', 'Critical', 'Finished']
   odd: number[] = [];
   even: number[] = [];
+
+  state = 'normal';
+
+  list = ['Milk', 'Sugar', 'Bread'];
+
+
 
 
 
@@ -158,4 +179,19 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.erroSub.unsubscribe();
   }
+
+
+  onAdd(item: string) {
+    this.list.push(item);
+  }
+
+  onDelete(item: string) {
+    this.list.splice(this.list.indexOf(item), 1);
+  }
+
+  onAnimate() {
+    this.state === 'normal' ? this.state = 'highlighted' : this.state = 'normal';
+  }
+
+  onShrink() { }
 }

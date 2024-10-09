@@ -12,6 +12,7 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 import { LogingInterceptorService } from './logging-interceptor.service';
 import { HoverDirective } from './hover.directive';
 import { TrimLeadingZeroDirective } from './trimleadingZero.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TrimLeadingZeroDirective } from './trimleadingZero.directive';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
